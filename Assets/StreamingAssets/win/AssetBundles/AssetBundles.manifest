@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2672646422
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: bot
+      Dependencies: {}
