@@ -31,6 +31,7 @@ namespace GCommon
                 return m_LocalVersionInfo.GetVersionString();
             }
         }
+
         public void Init()
         {
             //set local res path
@@ -63,7 +64,7 @@ namespace GCommon
                 Directory.CreateDirectory(Context.CacheAddr); 
             }
 
-            // 为什么要从Local复制文件到Cache
+            // 为什么要从Local复制文件到Cache?
             // 从Local复制文件到Cache
             string cachePath = Path.Combine(Context.CacheAddr, Context.VersionInfoPath);
             if (!File.Exists(cachePath))
@@ -383,6 +384,11 @@ namespace GCommon
             Context.OnStarted(ResHotUpdateResult.HOTUPDATE);
         }
 
+        /// <summary>
+        /// 从StreamingAssets中复制资源版本文件到缓存目录【为什么要复制？】，读取文件并加载到内存
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="onFinish"></param>
         void LoadFileInfo_Local(string path, Action<bool> onFinish)
         {
             if (!Directory.Exists(Context.CacheAddr))
@@ -424,6 +430,7 @@ namespace GCommon
 
             try
             {
+                // 这个path应该就是cachePath
                 path = path.Replace('\\', '/');
                 string s = File.ReadAllText(path);
                 if (!m_LocalVersionInfo.ParseFileInfo(s))
